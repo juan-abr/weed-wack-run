@@ -1,0 +1,54 @@
+[gd_scene load_steps=12 format=2]
+
+[ext_resource path="res://art/repairman/back/cfe9fd4f-995c-4331-b3a2-66f7ab70f210.png" type="Texture" id=1]
+[ext_resource path="res://art/repairman/right/ff71aab7-d752-4a4d-afa0-7891fa6af649.png" type="Texture" id=2]
+[ext_resource path="res://art/repairman/front/00e479a6-360c-4d83-96ff-f93d538c4c65.png" type="Texture" id=3]
+[ext_resource path="res://art/repairman/left/03ecc432-ea4c-4544-a13c-9e76d9b36cf7.png" type="Texture" id=4]
+[ext_resource path="res://art/repairman/right/ae1f8929-a833-47c9-bbaa-0b5d068225a1.png" type="Texture" id=5]
+[ext_resource path="res://art/repairman/back/a2d1e576-441f-4b9f-9b06-d63751c56f7d.png" type="Texture" id=6]
+[ext_resource path="res://art/repairman/left/492663f4-c4ce-4607-a859-74f5f884389b.png" type="Texture" id=7]
+[ext_resource path="res://art/repairman/front/a684424b-c1e5-4902-bcae-98a6f28b5552.png" type="Texture" id=8]
+[ext_resource path="res://Player.gd" type="Script" id=9]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 6 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "backward",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 8 ) ],
+"loop": true,
+"name": "forward",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 4 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "left",
+"speed": 5.0
+}, {
+"frames": [ ExtResource( 5 ), ExtResource( 2 ) ],
+"loop": true,
+"name": "right",
+"speed": 5.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 6.0
+height = 4.0
+
+[node name="Player" type="Area2D"]
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_group_": true
+}
+speed = 100
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+frames = SubResource( 1 )
+animation = "forward"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[connection signal="body_entered" from="." to="." method="_on_Player_body_entered"]
